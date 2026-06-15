@@ -1,0 +1,10 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+:root{
+    font-family: 'Poppins', sans-serif;
+}
+
+.flex-help::-webkit-scrollbar {
+    display: none;
+}
