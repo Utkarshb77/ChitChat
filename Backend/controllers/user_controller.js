@@ -27,3 +27,38 @@ export const signup = async (req, res) => {
         res.status(400).json({ message: error.message });
     }
 };
+
+export const login = async(req,res)=>{
+    try {
+        const { email, password } = req.body;
+        const existingUser = await user.findOne({ email });
+        if (!existingUser) {
+            return res.status(404).json({ message: "User not found" });
+        }
+        const isPasswordCorrect = await bcrypt.compare(password, existingUser.password);
+        if (!isPasswordCorrect) {
+            return res.status(400).json({ message: "Invalid email or password" });
+        }
+        createTokenAndSaveCokkie(existingUser._id , res);
+        res.status(200).json({
+            message: "Login successful" ,
+            existingUser : {
+                _id : existingUser._id,
+                name: existingUser.name,
+                email: existingUser.email
+            }
+        });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+}
+
+export const logout = (req,res)=>{
+    try{
+        res.clearCookie('jwt');
+        res.status(200).json({ message: "Logout successful" });
+    }
+    catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+}
