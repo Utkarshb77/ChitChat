@@ -1,11 +1,14 @@
 import express from 'express';
 import dotenv from 'dotenv';
 dotenv.config();
+import userRoutes from './routes/user_route.js';
 
+const app = express();
+app.use(express.json());
+app.use('/user', userRoutes);
 import mongoose from 'mongoose';
 
 const MONGODB_URI = process.env.MONGODB_URI;
-const app = express();
 const PORT = process.env.PORT || 7777;
 
 async function startServer() {
