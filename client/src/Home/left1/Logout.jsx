@@ -8,7 +8,7 @@ function Logout() {
 
     const handleLogout = async () => {
         try {
-            await axios.post('http://localhost:7777/user/logout', {}, { withCredentials: true });
+            await axios.post('/api/user/logout', {}, { withCredentials: true });
         } catch (error) {
             console.error(error);
         } finally {
@@ -29,4 +29,4 @@ function Logout() {
     )
 }
 
-export default Logout
+export default Logout;

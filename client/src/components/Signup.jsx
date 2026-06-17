@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useForm } from "react-hook-form"
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 function Signup({ onSwitchToLogin }) {
   const { register, handleSubmit, watch, reset, formState: { errors } } = useForm()
@@ -18,7 +19,7 @@ function Signup({ onSwitchToLogin }) {
         confirmPassword: data.confirmPassword,
       }
 
-      const response = await axios.post('http://localhost:7777/user/signup', userInfo, {
+      const response = await axios.post('/api/user/signup', userInfo, {
         withCredentials: true,
       });
 
@@ -97,7 +98,10 @@ function Signup({ onSwitchToLogin }) {
 
               <p className="mt-6 text-center text-sm text-base-content/60">
                 Already have an account?{' '}
-                <button type="button" onClick={onSwitchToLogin} className="font-medium text-success hover:underline">Log in</button>
+                <Link to="/login" className="font-medium text-success hover:underline">
+                  {" "}
+                  Login
+                </Link>
               </p>
             </div>
           </div>
