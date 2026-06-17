@@ -12,7 +12,7 @@ export const signup = async (req, res) => {
         if (existingUser) {
             return res.status(400).json({ message: "Email already exists" });
         }
-        const hashedPassword = await bcrypt.hash(password, 17);
+        const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = new user({
             name,
             email,
@@ -21,7 +21,14 @@ export const signup = async (req, res) => {
         await newUser.save();
         if(newUser){
             createTokenAndSaveCokkie(newUser._id , res);
-            res.status(201).json({ message: "User created successfully" , newUser });
+            res.status(201).json({
+                message: "User created successfully",
+                newUser: {
+                    _id: newUser._id,
+                    name: newUser.name,
+                    email: newUser.email,
+                },
+            });
         }
     } catch (error) {
         res.status(400).json({ message: error.message });
@@ -55,7 +62,12 @@ export const login = async(req,res)=>{
 
 export const logout = (req,res)=>{
     try{
-        res.clearCookie('jwt');
+        res.clearCookie('jwt', {
+            httpOnly: true,
+            secure: false,
+            sameSite: 'lax',
+            path: '/',
+        });
         res.status(200).json({ message: "Logout successful" });
     }
     catch (error) {
