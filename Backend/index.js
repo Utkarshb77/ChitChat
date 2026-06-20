@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 dotenv.config();
 import userRoutes from './routes/user_route.js';
+import messageRoutes from './routes/message.route.js';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
@@ -16,6 +17,7 @@ app.use(cors({
 }));
 
 app.use('/user', userRoutes);
+app.use('/message', messageRoutes);
 
 const MONGODB_URI = process.env.MONGODB_URI;
 const PORT = process.env.PORT || 7777;
