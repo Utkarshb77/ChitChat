@@ -21,7 +21,6 @@ const messageSchema = new mongoose.Schema({
             message: "Message is required"
         }
     },
-    createdAt: { type: Date, default: Date.now },
 }, { timestamps: true });
 
 const Message = mongoose.model("Message", messageSchema);

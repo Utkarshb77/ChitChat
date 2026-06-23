@@ -6,6 +6,7 @@ import Signup from './components/Signup';
 import Login from './components/Login';
 import { useAuth } from './context/AuthProvider';
 import { Navigate, Route, Routes } from 'react-router-dom';
+import Loading from './components/loading';
 
 function App() {
   const { AuthUser } = useAuth();
@@ -27,6 +28,4 @@ function App() {
     </Routes>
   )
 }
-
 export default App
- 
