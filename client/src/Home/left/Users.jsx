@@ -6,7 +6,7 @@ function Users() {
     const { allUsers, loading } = useGetAllUsers();
 
     return (
-        <div style={{ maxHeight: "calc(82vh - 1vh)" }} className=' flex-help overflow-y-auto'>
+        <div className='flex-1 overflow-y-auto'>
             {loading ? (
                 <div className="text-center py-4 text-gray-500">Loading users...</div>
             ) : allUsers && allUsers.length > 0 ? (

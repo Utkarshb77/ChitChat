@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 import { IoSend } from "react-icons/io5";
-import axios from 'axios';
-import useConversation from '../../statemanage/useconversation';
 import useSendMessage from '../../context/useSendMessage';
 
 function Type() {
@@ -10,21 +8,9 @@ function Type() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!message.trim() || !selectedConversation?._id) return;
-
-        setLoading(true);
-        try {
-            const response = await axios.post(`/api/message/send/${selectedConversation._id}`, {
-                message: message.trim(),
-            }, { withCredentials: true });
-
-            setMessages([...messages, response.data]);
-            setMessage('');
-        } catch (error) {
-            console.log("Error sending message: ", error);
-        } finally {
-            setLoading(false);
-        }
+        if (!message.trim()) return;
+        await sendmessages(message.trim());
+        setMessage('');
     };
 
     return (

@@ -5,10 +5,10 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import userRoute from "./routes/user.route.js";
 import messageRoute from "./routes/message.route.js";
+import { app, server } from "./SocketIO/server.js";
 
 dotenv.config();
 
-const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
@@ -16,7 +16,7 @@ app.use(cors({
   credentials: true,
 }));
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 7777;
 const URI = process.env.MONGODB_URI;
 
 app.use("/api/user", userRoute);
@@ -29,6 +29,6 @@ try {
   console.log("Error connecting to MongoDB:", error);
 }
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

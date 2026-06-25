@@ -2,10 +2,11 @@ import React, { useEffect, useRef } from 'react';
 import Message from './Message';
 import useGetMessage from '../../context/useGetMessage';
 import Loading from '../../components/loading';
+import useGetSocketMessage from '../../context/useGetSocketMessage';
 
 function Messages() {
   const { loading, messages } = useGetMessage();
-
+  useGetSocketMessage();
   const lastMsgRef = useRef();
   useEffect(() => {
     setTimeout(() => {
@@ -14,7 +15,7 @@ function Messages() {
   }, [messages]);
 
   return (
-    <div className="flex-1 overflow-y-auto p-4" style={{ minHeight: "calc(92vh - 8vh)" }}>
+    <div className="flex-1 overflow-y-auto p-4">
       {loading ? (
         <Loading />
       ) : messages.length === 0 ? (
