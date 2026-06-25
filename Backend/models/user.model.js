@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 
-const userSchema = new mongoose.Schema({
-    name: {
+const userSchema = mongoose.Schema({
+    fullname: {
         type: String,
-        required: true
+        required: true,
     },
     email: {
         type: String,
@@ -13,13 +13,9 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true
-    }
-},
-    {
-        timestamps: true,
-    }
-);
+        required: true,
+    },
+}, { timestamps: true });
 
 // Ensure the model uses the existing 'users' collection explicitly
 const User = mongoose.model("User", userSchema, "users");

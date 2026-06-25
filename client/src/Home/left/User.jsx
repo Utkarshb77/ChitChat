@@ -10,14 +10,14 @@ function User({ user }) {
     return (
         <div className={`hover:bg-slate-700 duration-200 ${isSelected ? "bg-slate-700" : ""}`} onClick={() => setSelectedConversation(user)}>
             <div className='flex items-center gap-4 p-2 cursor-pointer hover:bg-slate-800'>
-                <div className="avatar avatar-online">
+                <div className="avatar online">
                     <div className="w-16 rounded-full">
-                        <img src="https://img.daisyui.com/images/profile/demo/gordon@192.webp" alt={user.name} />
+                        <img src="https://img.daisyui.com/images/profile/demo/gordon@192.webp" alt={user.fullname} />
                     </div>
                 </div>
 
                 <div>
-                    <h1 className='font-bold'>{user.name}</h1>
+                    <h1 className='font-bold'>{user.fullname}</h1>
                     <span className='text-sm text-gray-500'>{user.email}</span>
                 </div>
             </div>
@@ -26,4 +26,3 @@ function User({ user }) {
 }
 
 export default User
-

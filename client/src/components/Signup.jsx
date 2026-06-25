@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { useForm } from "react-hook-form"
 import axios from 'axios'
+import { useAuth } from '../context/AuthProvider'
 import { Link } from 'react-router-dom'
 
-function Signup({ onSwitchToLogin }) {
+function Signup() {
   const { register, handleSubmit, watch, reset, formState: { errors } } = useForm()
+  const { setAuthUser } = useAuth()
   const [message, setMessage] = useState('')
   const [loading, setLoading] = useState(false)
 
@@ -13,7 +15,7 @@ function Signup({ onSwitchToLogin }) {
     setLoading(true)
     try {
       const userInfo = {
-        name: data.username,
+        fullname: data.fullname,
         email: data.email,
         password: data.password,
         confirmPassword: data.confirmPassword,
@@ -25,11 +27,12 @@ function Signup({ onSwitchToLogin }) {
 
       if (response.data) {
         reset();
+        setAuthUser(response.data.user);
       }
 
       setMessage(response.data?.message || 'Account created successfully')
     } catch (error) {
-      setMessage(error.response?.data?.message || 'Signup failed')
+      setMessage(error.response?.data?.error || 'Signup failed')
     } finally {
       setLoading(false)
     }
@@ -66,9 +69,9 @@ function Signup({ onSwitchToLogin }) {
 
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
                 <div>
-                  <label className="mb-2 block text-sm font-medium">Username</label>
-                  <input type="text" placeholder="Enter your username" className="input input-bordered w-full" {...register("username", { required: "Username is required" })} />
-                  {errors.username && <p className="mt-1 text-xs text-error">{errors.username.message}</p>}
+                  <label className="mb-2 block text-sm font-medium">Full Name</label>
+                  <input type="text" placeholder="Enter your full name" className="input input-bordered w-full" {...register("fullname", { required: "Full name is required" })} />
+                  {errors.fullname && <p className="mt-1 text-xs text-error">{errors.fullname.message}</p>}
                 </div>
 
                 <div>

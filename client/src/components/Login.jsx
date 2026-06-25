@@ -4,7 +4,7 @@ import axios from 'axios'
 import { useAuth } from '../context/AuthProvider'
 import { Link } from 'react-router-dom'
 
-function Login({ onSwitchToSignup }) {
+function Login() {
     const { register, handleSubmit, formState: { errors } } = useForm()
     const { setAuthUser } = useAuth()
     const [message, setMessage] = useState('')
@@ -23,11 +23,11 @@ function Login({ onSwitchToSignup }) {
             })
 
             setMessage(response.data?.message || 'Login successful')
-            if (response.data?.existingUser) {
-                setAuthUser(response.data.existingUser)
+            if (response.data?.user) {
+                setAuthUser(response.data.user)
             }
         } catch (error) {
-            setMessage(error.response?.data?.message || 'Login failed')
+            setMessage(error.response?.data?.error || 'Login failed')
         } finally {
             setLoading(false)
         }

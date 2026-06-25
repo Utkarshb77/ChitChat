@@ -1,47 +1,34 @@
-import express from 'express';
-import dotenv from 'dotenv';
+import express from "express";
+import dotenv from "dotenv";
+import mongoose from "mongoose";
+import cors from "cors";
+import cookieParser from "cookie-parser";
+import userRoute from "./routes/user.route.js";
+import messageRoute from "./routes/message.route.js";
+
 dotenv.config();
-import userRoutes from './routes/user_route.js';
-import messageRoutes from './routes/message.route.js';
-import cors from 'cors';
-import mongoose from 'mongoose';
-import cookieParser from 'cookie-parser';
 
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
-
 app.use(cors({
-    origin: 'http://localhost:5173',
-    credentials: true,
+  origin: "http://localhost:5173",
+  credentials: true,
 }));
 
-app.use('/user', userRoutes);
-app.use('/message', messageRoutes);
+const PORT = process.env.PORT || 3001;
+const URI = process.env.MONGODB_URI;
 
-const MONGODB_URI = process.env.MONGODB_URI;
-const PORT = process.env.PORT || 7777;
+app.use("/api/user", userRoute);
+app.use("/api/message", messageRoute);
 
-async function startServer() {
-    try {
-        if (!MONGODB_URI) {
-            throw new Error('MONGODB_URI is not defined');
-        }
-
-        await mongoose.connect(MONGODB_URI);
-        console.log('Connected to MongoDB');
-
-        app.listen(PORT, () => {
-            console.log(`Server is running on port ${PORT}`);
-        });
-    } catch (error) {
-        console.error('Error connecting to MongoDB:', error);
-        process.exit(1);
-    }
+try {
+  mongoose.connect(URI);
+  console.log("Connected to MongoDB");
+} catch (error) {
+  console.log("Error connecting to MongoDB:", error);
 }
 
-app.get('/', (req, res) => {
-    res.send("Hello World");
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
-
-startServer();

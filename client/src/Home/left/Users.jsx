@@ -1,9 +1,9 @@
 import React from 'react'
 import User from './User';
-import userGetAllUsers from '../../context/userGetAllUsers';
+import useGetAllUsers from '../../context/userGetAllUsers';
 
 function Users() {
-    const { allUsers, loading } = userGetAllUsers();
+    const { allUsers, loading } = useGetAllUsers();
 
     return (
         <div style={{ maxHeight: "calc(82vh - 1vh)" }} className=' flex-help overflow-y-auto'>
@@ -21,4 +21,3 @@ function Users() {
 }
 
 export default Users
-

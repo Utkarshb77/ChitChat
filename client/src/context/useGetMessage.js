@@ -10,8 +10,10 @@ function useGetMessage() {
         const getmessages = async () => {
             setLoading(true);
             try {
-                const response = await axios.get(`/api/message/get/${selectedConversation._id}`);
-                setMessages(response.data.data || []);
+                const response = await axios.get(`/api/message/get/${selectedConversation._id}`, {
+                    withCredentials: true
+                });
+                setMessages(response.data);
                 setLoading(false);
             } catch (error) {
                 setLoading(false);

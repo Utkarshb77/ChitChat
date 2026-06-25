@@ -1,25 +1,38 @@
-import React from 'react';
-import Messages from './Messages';
-import useGetMessage from '../../context/useGetMessage';
+import React from 'react'
+import { useAuth } from '../../context/AuthProvider'
 
-function Message() {
-  const { messages, loading } = useGetMessage();
+function Message({ message }) {
+  const { AuthUser } = useAuth();
+  const itsMe = message.senderId === AuthUser._id;
+
+  const chatName = itsMe ? "chat-end" : "chat-start";
+  const chatColor = itsMe ? "bg-blue-500" : "";
+
+  const createdAt = new Date(message.createdAt);
+  const formattedTime = createdAt.toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
   return (
-    <>
-      <div className="flex-1 overflow-y-auto p-4">
-        {loading ? (
-          <div className="flex items-center justify-center h-full">
-            <span className="loading loading-dots loading-lg text-green-400"></span>
+    <div>
+      <div className={`chat ${chatName}`}>
+        <div className="chat-image avatar">
+          <div className="w-10 rounded-full">
+            <img
+              alt="Chat avatar"
+              src="https://img.daisyui.com/images/profile/demo/kenobee@192.webp"
+            />
           </div>
-        ) : messages.length === 0 ? (
-          <div className="flex items-center justify-center h-full">
-            <p className="text-center text-sm text-gray-500">Say Hii! 👋 Start the conversation</p>
-          </div>
-        ) : (
-          messages.map((msg) => <Messages key={msg._id} message={msg} />)
-        )}
+        </div>
+        <div className="chat-header">
+          <time className="text-xs opacity-50 ml-1">{formattedTime}</time>
+        </div>
+        <div className={`chat-bubble ${chatColor}`}>
+          {message.message}
+        </div>
       </div>
-    </>
+    </div>
   )
 }
 

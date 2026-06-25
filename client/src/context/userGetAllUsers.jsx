@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useAuth } from './AuthProvider';
 import axios from 'axios';
 
-const userGetAllUsers = () => {
+const useGetAllUsers = () => {
     const [allUsers, setAllUsers] = useState([]);
     const [loading, setLoading] = useState(false);
     const { AuthUser } = useAuth();
@@ -11,10 +11,10 @@ const userGetAllUsers = () => {
         const getallusers = async () => {
             setLoading(true);
             try {
-                const response = await axios.get('/api/user/getUsers', {
+                const response = await axios.get('/api/user/allusers', {
                     withCredentials: true
                 });
-                setAllUsers(response.data.allUsers || []);
+                setAllUsers(response.data);
             } catch (error) {
                 console.error("Error fetching users: ", error);
             } finally {
@@ -29,4 +29,4 @@ const userGetAllUsers = () => {
         loading
     }
 }
-export default userGetAllUsers
+export default useGetAllUsers
