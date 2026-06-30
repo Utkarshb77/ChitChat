@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import useconversations from '../statemanage/useconversation';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 
 function useSendMessage() {
     const [loading, setLoading] = useState(false);
@@ -19,7 +20,7 @@ function useSendMessage() {
                 setLoading(false);
             } catch (error) {
                 setLoading(false);
-                console.log("Error in sending messages: ", error);
+                toast.error('Failed to send message');
             }
         }
         setLoading(false);

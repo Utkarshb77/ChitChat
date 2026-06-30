@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Toaster } from 'react-hot-toast';
 import Left from './Home/left/Left';
 import Right from './Home/right/Right';
 import Logout from './Home/left1/Logout';
@@ -20,12 +21,15 @@ function App() {
   );
 
   return (
-    <Routes>
-      <Route path="/" element={AuthUser ? <ChatLayout /> : <Navigate to="/login" replace />} />
-      <Route path="/login" element={AuthUser ? <Navigate to="/" replace /> : <Login />} />
-      <Route path="/signup" element={AuthUser ? <Navigate to="/" replace /> : <Signup />} />
-      <Route path="*" element={<Navigate to={AuthUser ? "/" : "/login"} replace />} />
-    </Routes>
+    <>
+      <Routes>
+        <Route path="/" element={AuthUser ? <ChatLayout /> : <Navigate to="/login" replace />} />
+        <Route path="/login" element={AuthUser ? <Navigate to="/" replace /> : <Login />} />
+        <Route path="/signup" element={AuthUser ? <Navigate to="/" replace /> : <Signup />} />
+        <Route path="*" element={<Navigate to={AuthUser ? "/" : "/login"} replace />} />
+      </Routes>
+      <Toaster position="top-center" />
+    </>
   )
 }
 export default App

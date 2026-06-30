@@ -1,22 +1,23 @@
 import { useEffect } from 'react';
 import { useSocketContext } from './SocketContext';
 import useconversations from "../statemanage/useconversation";
-import notification from "../assets/notification.mp3";
+import notificationSound from "../assets/notification.mp3";
 
 function useGetSocketMessage() {
     const { socket } = useSocketContext();
     const { messages, setMessages } = useconversations();
 
     useEffect(() => {
-        socket.on("newMessage", (newMessage) => {
-            const notification = new Audio(sound);
-            notification.play();
-        })
+        if (!socket) return;
 
-        socket.on("newMessage", (newMessage) => {
+        const handleNewMessage = (newMessage) => {
+            const sound = new Audio(notificationSound);
+            sound.play();
             setMessages([...messages, newMessage]);
-        });
-        return () => { socket.off("newMessage"); }
+        };
+
+        socket.on("newMessage", handleNewMessage);
+        return () => { socket.off("newMessage", handleNewMessage); }
     }, [socket, messages, setMessages])
 }
 

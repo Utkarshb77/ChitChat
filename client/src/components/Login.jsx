@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form"
 import axios from 'axios'
 import { useAuth } from '../context/AuthProvider'
 import { Link } from 'react-router-dom'
+import toast from 'react-hot-toast'
 
 function Login() {
     const { register, handleSubmit, formState: { errors } } = useForm()
@@ -22,12 +23,12 @@ function Login() {
                 withCredentials: true,
             })
 
-            setMessage(response.data?.message || 'Login successful')
+            toast.success(response.data?.message || 'Login successful')
             if (response.data?.user) {
                 setAuthUser(response.data.user)
             }
         } catch (error) {
-            setMessage(error.response?.data?.error || 'Login failed')
+            toast.error(error.response?.data?.error || 'Login failed')
         } finally {
             setLoading(false)
         }

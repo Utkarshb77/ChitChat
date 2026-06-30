@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useAuth } from './AuthProvider';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 
 const useGetAllUsers = () => {
     const [allUsers, setAllUsers] = useState([]);
@@ -16,7 +17,7 @@ const useGetAllUsers = () => {
                 });
                 setAllUsers(response.data);
             } catch (error) {
-                console.error("Error fetching users: ", error);
+                toast.error('Failed to load users');
             } finally {
                 setLoading(false);
             }

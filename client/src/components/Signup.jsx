@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form"
 import axios from 'axios'
 import { useAuth } from '../context/AuthProvider'
 import { Link } from 'react-router-dom'
+import toast from 'react-hot-toast'
 
 function Signup() {
   const { register, handleSubmit, watch, reset, formState: { errors } } = useForm()
@@ -30,9 +31,9 @@ function Signup() {
         setAuthUser(response.data.user);
       }
 
-      setMessage(response.data?.message || 'Account created successfully')
+      toast.success(response.data?.message || 'Account created successfully')
     } catch (error) {
-      setMessage(error.response?.data?.error || 'Signup failed')
+      toast.error(error.response?.data?.error || 'Signup failed')
     } finally {
       setLoading(false)
     }

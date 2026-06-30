@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { IoSearchCircleOutline } from "react-icons/io5";
 import useGetAllUsers from '../../context/userGetAllUsers.jsx';
 import useconversations from '../../statemanage/useconversation.js';
-
+import toast from 'react-hot-toast';
 function Search() {
     const [search, setSearch] = useState('');
     const { allUsers } = useGetAllUsers();
@@ -15,7 +15,7 @@ function Search() {
             setSelectedConversation(conversation);
             setSearch('');
         } else {
-            alert("No user found");
+            toast.error("No user found");
         }
     }
 

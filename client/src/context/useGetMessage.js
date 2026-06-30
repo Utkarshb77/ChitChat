@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import useconversations from "../statemanage/useconversation";
 import axios from "axios";
+import toast from 'react-hot-toast';
 
 function useGetMessage() {
     const [loading, setLoading] = useState(false);
@@ -17,7 +18,7 @@ function useGetMessage() {
                 setLoading(false);
             } catch (error) {
                 setLoading(false);
-                console.log("Error in fetching messages: ", error);
+                toast.error('Failed to load messages');
             }
         };
 
