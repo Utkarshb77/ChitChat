@@ -1,10 +1,31 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
-:root{
+:root {
     font-family: 'Poppins', sans-serif;
 }
 
+html,
+body,
+#root {
+    height: 100%;
+    height: 100dvh;
+    overflow: hidden;
+}
+
+.safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
 .flex-help::-webkit-scrollbar {
+    display: none;
+}
+
+.hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
     display: none;
 }

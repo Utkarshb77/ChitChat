@@ -12,16 +12,16 @@ function User({ user }) {
     if (!user) return null;
     return (
         <div className={`hover:bg-slate-700 duration-200 ${isSelected ? "bg-slate-700" : ""}`} onClick={() => setSelectedConversation(user)}>
-            <div className='flex items-center gap-4 p-2 cursor-pointer hover:bg-slate-800'>
+            <div className='flex items-center gap-3 md:gap-4 p-2 px-3 md:px-2 cursor-pointer hover:bg-slate-800'>
                 <div className={`avatar ${isOnline ? "online" : ""}`}>
-                    <div className="w-16 rounded-full">
+                    <div className="w-12 md:w-16 rounded-full">
                         <img src="https://img.daisyui.com/images/profile/demo/gordon@192.webp" alt={user.fullname} />
                     </div>
                 </div>
 
-                <div>
-                    <h1 className='font-bold'>{user.fullname}</h1>
-                    <span className='text-sm text-gray-500'>{user.email}</span>
+                <div className='min-w-0 flex-1'>
+                    <h1 className='font-bold text-sm md:text-base truncate'>{user.fullname}</h1>
+                    <span className='text-xs md:text-sm text-gray-500 truncate block'>{user.email}</span>
                 </div>
             </div>
         </div>

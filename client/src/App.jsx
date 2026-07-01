@@ -8,17 +8,30 @@ import Login from './components/Login';
 import { useAuth } from './context/AuthProvider';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Loading from './components/loading';
+import useconversations from './statemanage/useconversation';
 
 function App() {
   const { AuthUser } = useAuth();
 
-  const ChatLayout = () => (
-    <div className='flex h-screen w-full'>
-      <Logout />
-      <Left />
-      <Right />
-    </div>
-  );
+  const ChatLayout = () => {
+    const { selectedConversation } = useconversations();
+
+    return (
+      <div className='flex h-screen w-full'>
+        <div className="hidden md:flex">
+          <Logout />
+        </div>
+
+        <div className={`${selectedConversation ? 'hidden' : 'flex'} md:flex w-full md:w-[30%] flex-col`}>
+          <Left />
+        </div>
+
+        <div className={`${selectedConversation ? 'flex' : 'hidden'} md:flex w-full md:w-[70%] flex-col`}>
+          <Right />
+        </div>
+      </div>
+    );
+  };
 
   return (
     <>

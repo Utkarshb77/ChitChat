@@ -20,14 +20,14 @@ function Search() {
     }
 
     return (
-        <div className='px-6 py-4'>
+        <div className='px-3 md:px-6 py-3 md:py-4'>
             <form onSubmit={(e) => handleSubmit(e)}>
                 <div className='flex space-x-2' >
-                    <label className="input flex items-center gap-2 w-[80%]">
-                        <input type="search" className="grow" placeholder="Search" value={search} onChange={(e) => setSearch(e.target.value)} />
+                    <label className="input flex items-center gap-2 w-full md:w-[80%]">
+                        <input type="search" className="grow text-sm md:text-base" placeholder="Search" value={search} onChange={(e) => setSearch(e.target.value)} />
                     </label>
-                    <button>
-                        <IoSearchCircleOutline className='text-5xl p-2 hover:bg-gray-600 rounded-full duration-300' />
+                    <button className='flex-shrink-0'>
+                        <IoSearchCircleOutline className='text-4xl md:text-5xl p-1.5 md:p-2 hover:bg-gray-600 rounded-full duration-300' />
                     </button>
                 </div>
             </form>

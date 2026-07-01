@@ -1,14 +1,36 @@
 import React from 'react';
 import Search from './Search';
 import Users from './Users';
+import { MdLogout } from "react-icons/md";
+import axios from 'axios';
+import { useAuth } from '../../context/AuthProvider';
+import toast from 'react-hot-toast';
+
 function Chats() {
+  const { setAuthUser } = useAuth();
+
+  const handleLogout = async () => {
+    try {
+      await axios.post('/api/user/logout', {}, { withCredentials: true });
+      toast.success('Logged out successfully');
+    } catch (error) {
+      toast.error('Logout failed');
+    } finally {
+      setAuthUser(null);
+    }
+  };
+
   return (
-    <div className='w-[30%] bg-black text-white flex flex-col h-full'>
-      <h1 className='font-bold text-2xl p-2 px-11'>ChitChat</h1>
+    <div className='w-full bg-black text-white flex flex-col h-full'>
+      <div className='flex items-center justify-between p-2 px-4 md:px-11'>
+        <h1 className='font-bold text-xl md:text-2xl'>ChitChat</h1>
+        <button onClick={handleLogout} className='md:hidden'>
+          <MdLogout className='text-4xl p-1.5 hover:bg-gray-600 rounded-lg duration-300' />
+        </button>
+      </div>
       <Search />
       <hr></hr>
       <Users />
-
     </div>
   )
 }
