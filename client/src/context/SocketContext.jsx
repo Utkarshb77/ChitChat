@@ -14,7 +14,7 @@ const SocketProvider = ({ children }) => {
 
     useEffect(() => {
         if (AuthUser) {
-            const newSocket = io("http://localhost:7777", {
+            const newSocket = io(import.meta.env.VITE_API_URL || "http://localhost:7777", {
                 query: {
                     userId: AuthUser._id,
                 },
