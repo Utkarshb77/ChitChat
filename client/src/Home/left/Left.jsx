@@ -22,8 +22,8 @@ function Chats() {
 
   return (
     <div className='w-full bg-black text-white flex flex-col h-full'>
-      <div className='flex items-center justify-between p-2 px-4 md:px-11'>
-        <h1 className='font-bold text-xl md:text-2xl'>ChitChat</h1>
+      <div className='flex items-center justify-between p-2 px-4 md:px-5'>
+        <img src='/logo.png' alt='ChitChat' className='h-12 w-auto object-contain' />
         <button onClick={handleLogout} className='md:hidden'>
           <MdLogout className='text-4xl p-1.5 hover:bg-gray-600 rounded-lg duration-300' />
         </button>

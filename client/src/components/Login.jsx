@@ -40,7 +40,10 @@ function Login() {
                 <div className="w-full max-w-md">
                     <div className="card bg-base-100 shadow-md">
                         <div className="card-body p-6 sm:p-8">
-                            <div className="mb-4">
+                        <div className="mb-4">
+                                <div className="flex justify-center mb-4">
+                                    <img src="/logo.png" alt="ChitChat" className="h-24 w-auto object-contain" />
+                                </div>
                                 <h2 className="text-2xl font-semibold">Log in</h2>
                                 <p className="mt-1 text-sm text-base-content/60">Sign in to your account to continue.</p>
                             </div>

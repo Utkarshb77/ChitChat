@@ -43,7 +43,7 @@ function Signup() {
     <div className="min-h-screen bg-base-200 px-4 py-10 text-base-content">
       <div className="mx-auto grid min-h-[calc(100vh-5rem)] max-w-5xl items-center lg:grid-cols-2 lg:gap-10">
         <section className="mb-8 space-y-5 lg:mb-0">
-          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-success">ChitChat</p>
+          <img src="/logo.png" alt="ChitChat" className="h-20 w-auto object-contain" />
 
           <h1 className="max-w-md text-4xl font-bold leading-tight sm:text-5xl">
             Meet new people, share ideas, and stay connected.
